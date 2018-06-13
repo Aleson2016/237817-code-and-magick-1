@@ -8,32 +8,18 @@ var userDialog = document.querySelector('.setup');
 userDialog.classList.remove('hidden');
 
 var rand = function (elements) {
-  var element = elements[Math.floor(Math.random() * elements.length)];
-  return element;
+  return elements[Math.floor(Math.random() * elements.length)];
 };
 
-var wizards = [
-  {
+var wizards = [];
+wizards.length = 4;
+for (var i = 0; i < wizards.length; i++) {
+  wizards[i] = {
     name: rand(WIZARD_FIRST_NAMES) + rand(WIZARD_SECOND_NAMES),
     coatColor: rand(WIZARD_COAT_COLORS),
     eyesColor: rand(WIZARD_EYES_COLORS)
-  },
-  {
-    name: rand(WIZARD_FIRST_NAMES) + rand(WIZARD_SECOND_NAMES),
-    coatColor: rand(WIZARD_COAT_COLORS),
-    eyesColor: rand(WIZARD_EYES_COLORS)
-  },
-  {
-    name: rand(WIZARD_FIRST_NAMES) + rand(WIZARD_SECOND_NAMES),
-    coatColor: rand(WIZARD_COAT_COLORS),
-    eyesColor: rand(WIZARD_EYES_COLORS)
-  },
-  {
-    name: rand(WIZARD_FIRST_NAMES) + rand(WIZARD_SECOND_NAMES),
-    coatColor: rand(WIZARD_COAT_COLORS),
-    eyesColor: rand(WIZARD_EYES_COLORS)
-  },
-];
+  };
+}
 
 var similarList = document.querySelector('.setup-similar-list');
 
