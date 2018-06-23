@@ -47,23 +47,20 @@ var setupOpenIcon = document.querySelector('.setup-open-icon');
 var userDialog = document.querySelector('.setup');
 var setupClose = userDialog.querySelector('.setup-close');
 var setupUserName = userDialog.querySelector('.setup-user-name');
-//Не знаю, как сделать, чтобы окно не закрывалось, когда поле в фокусе: setupUserName.onblur не работает
 
 var onPopupEscPress = function (evt) {
-  if (evt.keyCode === KEYCODE_ESC) {
+  if (evt.keyCode === KEYCODE_ESC && evt.target !== setupUserName) {
     closePopup();
   }
 };
 
 var openPopup = function () {
   userDialog.classList.remove('hidden');
-
   document.addEventListener('keydown', onPopupEscPress);
 };
 
 var closePopup = function () {
   userDialog.classList.add('hidden');
-
   document.removeEventListener('keydown', onPopupEscPress);
 };
 
@@ -96,27 +93,25 @@ var wizardCoat = setupWizard.querySelector('.wizard-coat');
 var wizardEyes = setupWizard.querySelector('.wizard-eyes');
 var setupFireball = document.querySelector('.setup-fireball-wrap');
 
-var makeColor = function (element, colors, inputElement, isBackground) {
-/* Не понимаю, почему при проверке данные отправляются криво.
-    if (isBackground) {
-    element.style.background = rand(colors);
-    inputElement.value = element.style.background;
-  }
-*/
+var setFillColor = function (element, colors, inputElement) {
   element.style.fill = rand(colors);
   inputElement.value = element.style.fill;
 };
 
+var setBackgroundColor = function (element, colors, inputElement) {
+  var color = rand(colors);
+  element.style.background = color;
+  inputElement.value = color;
+};
+
 wizardCoat.addEventListener('click', function () {
-  makeColor(wizardCoat, WIZARD_COAT_COLORS, inputCoatColor);
+  setFillColor(wizardCoat, WIZARD_COAT_COLORS, inputCoatColor);
 });
 
 wizardEyes.addEventListener('click', function () {
-  makeColor(wizardEyes, WIZARD_EYES_COLORS, inputEyesColor);
+  setFillColor(wizardEyes, WIZARD_EYES_COLORS, inputEyesColor);
 });
 
 setupFireball.addEventListener('click', function () {
-  //makeColor(setupFireball, FIREBALLS_COLORS, inputFireballColor, true);
-  setupFireball.style.background = rand(FIREBALLS_COLORS);
-  inputFireballColor.value = setupFireball.style.background;
+  setBackgroundColor(setupFireball, FIREBALLS_COLORS, inputFireballColor);
 });
